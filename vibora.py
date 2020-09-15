@@ -18,6 +18,15 @@ food = vector(0, 0)
 snake = [vector(10, 0)]
 aim = vector(0, -10)
 
+colorv = randrange(1,6) #1 = pink, 2 = black, 3 = yellow, 4 = green, 5 = purple
+#Se genera un número random para determinar el color que tendrá la serpiente
+
+colorf = randrange(1,6) #al igual que la serpiente, se generará un número para el color de la comida, los números representan los mismos colores que antes.
+
+#Se verifica que no sean iguales los colores de la comida y la serpiente
+while colorv == colorf:
+    colorf = randrange(1,6)
+
 def change(x, y):
     "Change snake direction." #Cambia las coordenadas x y y de la dirección
     aim.x = x
@@ -25,7 +34,7 @@ def change(x, y):
 
 def inside(head):
     "Return True if head inside boundaries." #Verifica que la serpiente no haya topado con el límite
-    return -200 < head.x < 190 and -200 < head.y < 190
+    return -200 < head.x < 190 and -200 < head.y < 190 
 
 def move():
     "Move snake forward one segment." #Dependiendo de la dirección se mueve la serpiente
@@ -72,13 +81,37 @@ def move():
     clear()
 
     for body in snake: #Color de la serpiente
-        square(body.x, body.y, 9, 'black')
+    #Dependiedo del número que se generó, se cambiará el color de la serpiente
+        if colorv == 1:
+            square(body.x, body.y, 9, 'pink')
+        elif colorv == 2:
+            square(body.x, body.y, 9, 'black')
+        elif colorv == 3:
+            square(body.x, body.y, 9, 'yellow')
+        elif colorv == 4:
+            square(body.x, body.y, 9, 'green')
+        elif colorv == 5:
+            square(body.x, body.y, 9, 'purple')
+    
 
-    square(food.x, food.y, 9, 'green') #Color de la comida
+    #Se le asigna el color generado dependiendo al número
+    if colorf == 1:
+        square(food.x, food.y, 9, 'pink')
+    elif colorf == 2:
+        square(food.x, food.y, 9, 'black')
+    elif colorf == 3:
+        square(food.x, food.y, 9, 'yellow')
+    elif colorf == 4:
+        square(food.x, food.y, 9, 'green')
+    elif colorf == 5:
+        square(food.x, food.y, 9, 'purple')
     update()
     ontimer(move, 100)
 
-setup(420, 420, 370, 0) #límites del juego
+
+
+
+setup(420, 420, 370, 0)
 hideturtle()
 tracer(False)
 listen()
